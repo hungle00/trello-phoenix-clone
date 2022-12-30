@@ -1,12 +1,12 @@
-defmodule TrelloClone.Title do
+defmodule TrelloClone.Kanban do
   @moduledoc """
-  The Title context.
+  The Kanban context.
   """
 
   import Ecto.Query, warn: false
   alias TrelloClone.Repo
 
-  alias TrelloClone.Title.Board
+  alias TrelloClone.Kanban.Board
 
   @doc """
   Returns the list of boards.

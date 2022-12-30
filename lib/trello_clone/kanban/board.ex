@@ -1,4 +1,4 @@
-defmodule TrelloClone.Title.Board do
+defmodule TrelloClone.Kanban.Board do
   use Ecto.Schema
   import Ecto.Changeset
 

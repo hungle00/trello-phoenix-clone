@@ -1,0 +1,35 @@
+.border {
+  border: 1px solid var(--gray-7);
+}
+
+@for $size from 1 through 6 {
+  .border-radius-#{$size} {
+    border-radius: var(--radius-#{$size});
+  }
+}
+
+.border-rounded {
+  border-radius: 50%;
+}
+
+@for $size from 0 through 8 {
+  .font-size-#{$size} {
+    font-size: var(--font-size-#{$size});
+  }
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-bold {
+  font-weight: 700;
+}

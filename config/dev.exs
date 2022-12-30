@@ -26,7 +26,10 @@ config :trello_clone, TrelloCloneWeb.Endpoint,
   secret_key_base: "WFI+okrkKz2kspAGLQGlQJRu+jYjyIQO74pomXIR2C6plR/tk11l5c8lwUHnPfM2",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    sass: { DartSass, :install_and_run,
+      [:default, ~w(--embed-source-map --source-map-urls=absolute --watch)]
+    }
   ]
 
 # ## SSL Support

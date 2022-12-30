@@ -1,21 +1,21 @@
 defmodule TrelloCloneWeb.BoardController do
   use TrelloCloneWeb, :controller
 
-  alias TrelloClone.Title
-  alias TrelloClone.Title.Board
+  alias TrelloClone.Kanban
+  alias TrelloClone.Kanban.Board
 
   def index(conn, _params) do
-    boards = Title.list_boards()
+    boards = Kanban.list_boards()
     render(conn, "index.html", boards: boards)
   end
 
   def new(conn, _params) do
-    changeset = Title.change_board(%Board{})
+    changeset = Kanban.change_board(%Board{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"board" => board_params}) do
-    case Title.create_board(board_params) do
+    case Kanban.create_board(board_params) do
       {:ok, board} ->
         conn
         |> put_flash(:info, "Board created successfully.")
@@ -27,20 +27,20 @@ defmodule TrelloCloneWeb.BoardController do
   end
 
   def show(conn, %{"id" => id}) do
-    board = Title.get_board!(id)
+    board = Kanban.get_board!(id)
     render(conn, "show.html", board: board)
   end
 
   def edit(conn, %{"id" => id}) do
-    board = Title.get_board!(id)
-    changeset = Title.change_board(board)
+    board = Kanban.get_board!(id)
+    changeset = Kanban.change_board(board)
     render(conn, "edit.html", board: board, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "board" => board_params}) do
-    board = Title.get_board!(id)
+    board = Kanban.get_board!(id)
 
-    case Title.update_board(board, board_params) do
+    case Kanban.update_board(board, board_params) do
       {:ok, board} ->
         conn
         |> put_flash(:info, "Board updated successfully.")
@@ -52,8 +52,8 @@ defmodule TrelloCloneWeb.BoardController do
   end
 
   def delete(conn, %{"id" => id}) do
-    board = Title.get_board!(id)
-    {:ok, _board} = Title.delete_board(board)
+    board = Kanban.get_board!(id)
+    {:ok, _board} = Kanban.delete_board(board)
 
     conn
     |> put_flash(:info, "Board deleted successfully.")
