@@ -1,5 +1,6 @@
 defmodule TrelloCloneWeb.BoardController do
   use TrelloCloneWeb, :controller
+  import Phoenix.LiveView.Controller
 
   alias TrelloClone.Kanban
   alias TrelloClone.Kanban.Board
@@ -27,8 +28,7 @@ defmodule TrelloCloneWeb.BoardController do
   end
 
   def show(conn, %{"id" => id}) do
-    board = Kanban.get_board!(id)
-    render(conn, "show.html", board: board)
+    live_render(conn, TrelloCloneWeb.BoardLive, session: %{"board_id" => id})
   end
 
   def edit(conn, %{"id" => id}) do

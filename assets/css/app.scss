@@ -4,7 +4,9 @@
 @import "components/dropdown.scss";
 @import "components/alert.scss";
 @import "components/header.scss";
+@import "components/board.scss";
 @import "utils.scss";
+
 
 /* Milligram v1.4.1 https://milligram.github.io
  * Copyright (c) 2020 CJ Patoilo Licensed under the MIT license
@@ -23,7 +25,7 @@ pre{padding: 1em;}
 
 .container{
   margin: 0 auto;
-  max-width: 100rem;
+  max-width: 90rem;
   padding: 0 2.0rem;
   position: relative;
   width: 100%
@@ -129,25 +131,4 @@ select {
 @keyframes fade-out-keys{
   0% { opacity: 1; }
   100% { opacity: 0; }
-}
-
-
-.column-flex {
-  display: flex;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
-
-  .column {
-    flex-basis: 25%;
-  }
-
-  .column-content {
-    background-color: var(--gray-4);
-    border-width: 2px;
-    border-radius: 0.5rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    padding: 0.5rem;
-  }
-
 }

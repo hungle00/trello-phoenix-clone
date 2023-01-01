@@ -1,0 +1,43 @@
+.board-container {
+  margin: 0 auto;
+  max-width: 112rem;
+  padding: 0 2.0rem;
+  position: relative;
+  width: 100%;
+}
+.column-flex {
+  display: flex;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+
+  .column {
+    flex-basis: 25%;
+  }
+
+  .column-content {
+    background-color: var(--gray-4);
+    border-width: 2px;
+    border-radius: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .card {
+    background-color: white;
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-3);
+    margin-bottom: .5rem;
+    padding: .5rem;
+  }
+  .add-card {
+    text-underline-offset: 4px;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    
+    &:hover {
+      text-decoration-line: underline;
+    }
+  }
+
+}

@@ -1,0 +1,16 @@
+<h2>Board: <%= @board.title %></h2>
+
+<div class="column-flex">
+  <%= for column <- @board.columns do %>
+    <div class="column">
+      <div class="column-content">
+        <p class='font-bold text-center'><%= String.capitalize(column.title) %></p>
+          <%= for card <- column.cards do %>
+            <p class="card"><%= card.content %></p>
+          <% end %>
+        <div class="add-card">Add card</div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

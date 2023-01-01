@@ -12,6 +12,12 @@
   border-radius: 50%;
 }
 
+@for $i from 1 through 6 {
+  .shadow-#{$i} {
+    box-shadow: var(--shadow-#{$i});
+  }
+}
+
 @for $size from 0 through 8 {
   .font-size-#{$size} {
     font-size: var(--font-size-#{$size});
