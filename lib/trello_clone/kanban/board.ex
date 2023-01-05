@@ -4,7 +4,7 @@ defmodule TrelloClone.Kanban.Board do
 
   schema "boards" do
     field :title, :string
-    has_many :columns, TrelloClone.Kanban.Column
+    has_many :columns, TrelloClone.Kanban.Column, preload_order: [asc: :order]
 
     timestamps()
   end
