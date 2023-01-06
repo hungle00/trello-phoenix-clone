@@ -20,14 +20,15 @@ defmodule TrelloCloneWeb.Router do
   scope "/", TrelloCloneWeb do
     pipe_through :browser
 
-    resources "/boards", BoardController
     get "/", BoardController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TrelloCloneWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", TrelloCloneWeb.Api, as: :api do
+    pipe_through :api
+
+    put "/cards/:id", CardController, :update
+  end
 
   # Enables LiveDashboard only for development
   #
@@ -79,6 +80,8 @@ defmodule TrelloCloneWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    resources "/boards", BoardController
   end
 
   scope "/", TrelloCloneWeb do
