@@ -1,6 +1,6 @@
 .board-container {
   margin: 0 auto;
-  max-width: 112rem;
+  max-width: 120rem;
   padding: 0 2.0rem;
   position: relative;
   width: 100%;
@@ -39,6 +39,20 @@
     
     &:hover {
       text-decoration-line: underline;
+    }
+  }
+
+  .empty-column {
+    border: dashed 2px var(--gray-6);
+    border-radius: var(--radius-2);
+    padding: var(--size-5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      text-decoration-line: underline;
+      cursor: pointer;
     }
   }
 

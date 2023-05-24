@@ -20,4 +20,11 @@ defmodule TrelloCloneWeb.BoardLive do
     new_board = Kanban.get_board!(socket.assigns.board.id)
     {:noreply, socket |> assign(:board, new_board)}
   end
+
+  def handle_event("remove_card", %{"card" => card_id}, socket) do
+    {id, _} = Integer.parse(card_id)
+    Kanban.get_card!(id) |> Kanban.delete_card
+    new_board = Kanban.get_board!(socket.assigns.board.id)
+    {:noreply, socket |> assign(:board, new_board)}
+  end
 end

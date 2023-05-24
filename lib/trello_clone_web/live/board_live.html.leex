@@ -1,31 +1,108 @@
 <h2>Board: <%= @board.title %></h2>
 
-<div class="column-flex">
+<div class="column-flex" x-data="modal">
   <%= for column <- @board.columns do %>
     <div class="column">
-      <div class="column-content" data-column-id="<%= column.id %>">
+      <div class="column-content">
         <p class='font-bold text-center'><%= String.capitalize(column.title) %></p>
+        <div class="cards" data-column-id="<%= column.id %>">
           <%= for card <- column.cards do %>
-            <div data-card-id="<%= card.id %>" x-data="{ edit: false }">
-              <p class="card-content" v-show="!edit">
-                <%= card.content %>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-size" @click="edit = ! edit">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                </svg>
-              </p>
-              <textarea x-show="edit" phx-blur="update_card" phx-value-card="<%= card.id %>"><%= card.content %></textarea>
+            <div data-card-id="<%= card.id %>" x-data="showEdit">
+              <div class="card-content" data-card-id="<%= card.id %>" x-show="!isEditing">
+                <p style="margin-bottom: 4px;"><%= card.content %></p>
+                <div>
+                  <span @click="toggleEdit">📝</span>
+                  <span phx-click="remove_card" phx-value-card="<%= card.id %>">❌</span>
+                </div>
+              </div>
+              <div x-show="isEditing">
+                <input @keydown.enter="disableEditing" x-model="text"
+                    phx-blur="update_card" phx-value-card="<%= card.id %>" 
+                    style="background: white;"/>
+                <button type="button" @click="toggleEdit" style="margin-top: -4px;">Cancel</button>
+              </div>
             </div>
           <% end %>
-          <div x-data="{ open: false }">
-            <div class="add-card" @click="open = ! open" x-show="!open">
-              Add card
-            </div>
-            <div x-show="open" >
-              <textarea @click.outside="open = false" phx-blur="add_card" phx-value-column="<%= column.id %>"></textarea>
-              <button type="button" @click="open = false">Cancel</button>
-            </div>
+        </div>
+        <div x-data="{ open: false }">
+          <div class="add-card" @click="open = ! open" x-show="!open">
+            Add card
           </div>
+          <div x-show="open" >
+            <textarea @click.outside="open = false" phx-blur="add_card" phx-value-column="<%= column.id %>"></textarea>
+            <button type="button" @click="open = false">Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
+  <div class="column">
+    <div class="empty-column">
+      <p @click="openColumnModal"><span class="font-size-6">+</span> Add column</p>
+    </div>
+  </div>
+
+  <div x-show="showColumnModal" class="phx-modal fade-in">
+    <div class="phx-modal-content fade-in-scale" @click.outside="openColumnModal">
+      <a class="phx-modal-close" @click="closeColumnModal">✖</a>
+      <h3>Add column</h3>
+      <form method="post">
+        <label for="title">Title</label>
+        <input id="column[title]" name="title" type="text">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          <option value="todo">Todo</option>
+          <option value="">Hello</option>
+        </select>
+        <div>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('modal', () => ({
+      showModal: false,
+      showColumnModal: false,
+      cardId: null,
+      content: null,
+
+      openModal(e) {
+        this.showModal = true
+        this.cardId = e.target.dataset.cardId
+        this.content = e.target.innerText
+      },
+      closeModal() {
+        this.showModal = false
+        this.cardId = null
+        this.content = null
+      },
+      openColumnModal() {
+        this.showColumnModal = true
+      },
+      closeColumnModal() {
+        this.showColumnModal = false
+      }
+    }))
+  })
+
+  function showEdit() {
+    return {
+      isEditing: false,
+      text: "Hello",
+      toggleEdit() {
+          this.isEditing = !this.isEditing;
+
+          if (this.isEditing) {
+              console.log("edit card");
+          }
+      },
+      disableEditing() {
+          this.isEditing = false;
+      }
+    };
+  }
+</script>

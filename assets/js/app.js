@@ -57,9 +57,8 @@ window.Alpine = Alpine
 Alpine.start()
 
 
-dragula(Array.from(document.querySelectorAll('.column-content')))
+dragula(Array.from(document.querySelectorAll('.cards')))
   .on('drop', (element, target) => {
-    console.log(element.dataset.columnId)
     fetch('/api/cards/' + element.dataset.cardId, {
       method: 'PUT',
       headers: {

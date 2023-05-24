@@ -81,7 +81,7 @@ select {
   margin: 15vh auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 70%;
 }
 
 .phx-modal-close {
@@ -111,6 +111,9 @@ select {
 }
 .fade-out {
   animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
+}
+.gu-mirror {
+  display: none;
 }
 
 @keyframes fade-in-scale-keys{
